@@ -13,7 +13,7 @@ sys.path.append(os.getcwd())
 
 @click.command()
 @click.option('--mpa-db-directory', required=True, help="The directory where the original MetaPhlAn database is saved",
-              type=click.Path(exists=True), default = sys.path.append(os.path.dirname(__file__)))
+              type=click.Path(exists=True), default = os.path.dirname(__file__)) # fix it can have va default
 @click.option('--db_name', required=False, default="mpa_vOct22_CHOCOPhlAnSGB_202212",
               help="The name of the database without a suffix")
 @click.option('--output', '-o', required=False, default=os.path.dirname(__file__),
@@ -24,7 +24,7 @@ def run_all(db_name, mpa_db_directory, output):
     output_dir_pkl = output + "/" + "mpa_vOct22_CHOCOPhlAnSGB_lon_subsp_190423.pkl"
     db_file_no_suffix = mpa_db_directory + "/" + db_name_no_suffix
     output_dir_db = output
-    # add_markers(db_file_no_suffix, output_dir_db)
+    add_markers(db_file_no_suffix, output_dir_db)
     update_pkl_file(pkl_file, output_dir_pkl)
     end_message(output_dir_db)
 
@@ -32,12 +32,12 @@ def run_all(db_name, mpa_db_directory, output):
 
 
 def add_markers(db_file, output_dir):
-    subprocess.run(f"bowtie2-inspect {db_file} > {output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212_markers.fasta")
+    subprocess.run(f"bowtie2-inspect {db_file} > {output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212_markers.fasta", shell=True)
     subprocess.run(
         f"cat {output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212_markers.fasta infantis_ref_markers_panphlan_190423.fa longum_subsp_ref_markers_panphlan_190423.fa > "
-        f"{output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212__markers_lon_subsp.fasta")
+        f"{output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212__markers_lon_subsp.fasta", shell=True)
     subprocess.run(f"bowtie2-build {output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212__markers_lon_subsp.fasta "
-                   f"{output_dir}/mpa_vOct22_CHOCOPhlAnSGB_lon_subsp")
+                   f"{output_dir}/mpa_vOct22_CHOCOPhlAnSGB_lon_subsp", shell=True)
 
 
 def update_pkl_file(pkl_file, output_dir):
@@ -98,7 +98,7 @@ def end_message(output_dir):
     print(f"MetaPhlAn database updated successfully.\n"
           f"The database is saved under {output_dir}/mpa_vOct22_CHOCOPhlAnSGB_lon_subsp\n"
           f"To run Metaphlan with this database add these flags:\n"
-          f"--bowtie2db {output_dir}\n"
+          f"--bowtie2db {output_dir}\n" # TODO:  add that it will print pout thw whole directory 
           f"--index mpa_vOct22_CHOCOPhlAnSGB_lon_subsp_190423")
 
 
