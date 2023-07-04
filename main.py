@@ -7,11 +7,13 @@ import pickle
 import bz2
 import subprocess
 import os
+import sys
+sys.path.append(os.getcwd())
 
 
 @click.command()
 @click.option('--mpa-db-directory', required=True, help="The directory where the original MetaPhlAn database is saved",
-              type=click.Path(exists=True), default = os.path.dirname(__file__))
+              type=click.Path(exists=True), default = sys.path.append(os.path.dirname(__file__)))
 @click.option('--db_name', required=False, default="mpa_vOct22_CHOCOPhlAnSGB_202212",
               help="The name of the database without a suffix")
 @click.option('--output', '-o', required=False, default=os.path.dirname(__file__),
