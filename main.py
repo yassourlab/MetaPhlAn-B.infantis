@@ -11,10 +11,10 @@ import os
 
 @click.command()
 @click.option('--mpa-db-directory', required=True, help="The directory where the original MetaPhlAn database is saved",
-              type=click.Path(exists=True), default=os.getcwd())
+              type=click.Path(exists=True), default = os.path.dirname(__file__))
 @click.option('--db_name', required=False, default="mpa_vOct22_CHOCOPhlAnSGB_202212",
               help="The name of the database without a suffix")
-@click.option('--output', '-o', required=False, default=os.getcwd(),
+@click.option('--output', '-o', required=False, default=os.path.dirname(__file__),
               help="The directory in which to save the new database")
 def run_all(db_name, mpa_db_directory, output):
     db_name_no_suffix = db_name.split(".")[0]
