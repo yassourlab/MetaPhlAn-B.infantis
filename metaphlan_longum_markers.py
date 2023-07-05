@@ -27,7 +27,7 @@ def run_all(db_name, mpa_db_directory, output):
     update_pkl_file(pkl_file, output_dir_pkl)
     end_message(output_dir_db)
 
-
+a
 
 
 def add_markers(db_file, output_dir):
