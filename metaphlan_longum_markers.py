@@ -16,7 +16,7 @@ import os
 @click.option('--db_name', required=False, default="mpa_vOct22_CHOCOPhlAnSGB_202212",
               help="The name of the database without a suffix")
 @click.option('--output', '-o', required=False, default=os.getcwd(),
-              help="The directory in which to save the new database")
+              help="The directory in which to save the new database", type=click.Path())
 def run_all(db_name, mpa_db_directory, output):
     db_name_no_suffix = db_name.split(".")[0]
     pkl_file = mpa_db_directory + "/" + db_name_no_suffix + ".pkl"
@@ -37,7 +37,6 @@ def add_markers(db_file, output_dir):
             f"{output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212__markers_lon_subsp.fasta", shell=True)
         subprocess.run(f"bowtie2-build {output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212__markers_lon_subsp.fasta "
                        f"{output_dir}/mpa_vOct22_CHOCOPhlAnSGB_lon_subsp", shell=True)
-        subprocess.run(f"bzip2 {output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212_markers.fasta", shell=True)
         subprocess.run(f"bzip2 {db_file}.fasta", shell=True)
     except:
         print("There wad an error creating the database")
