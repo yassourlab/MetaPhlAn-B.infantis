@@ -36,11 +36,11 @@ def add_markers(db_file, output_dir):
             f"cat {output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212_markers.fasta infantis_ref_markers_panphlan_190423.fa longum_subsp_ref_markers_panphlan_190423.fa > "
             f"{output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212_markers_lon_subsp.fasta", shell=True)
         subprocess.run(f"bowtie2-build {output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212_markers_lon_subsp.fasta "
-                       f"{output_dir}/mpa_vOct22_CHOCOPhlAnSGB_lon_subsp", shell=True)
-        # subprocess.run(f"rm -f {output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212_markers.fasta", shell=True)
-        # subprocess.run(f"bzip2 {output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212_markers_lon_subsp.fasta", shell=True)
+                       f"{output_dir}/mpa_vOct22_CHOCOPhlAnSGB_lon_subsp", shell=True) # TODO: add more threads. check what haapens if we ask for more threads than we have
+        subprocess.run(f"rm -f {output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212_markers.fasta", shell=True)
+        subprocess.run(f"bzip2 {output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212_markers_lon_subsp.fasta", shell=True)
     except:
-        print("There wad an error creating the database")
+        print("There was an error creating the database")
 
 
 def update_pkl_file(pkl_file, output_dir):
@@ -98,11 +98,25 @@ def update_pkl_file(pkl_file, output_dir):
 
 
 def end_message(output_dir):
-    print(f"MetaPhlAn database updated successfully.\n"
-          f"The database is saved under {output_dir}/mpa_vOct22_CHOCOPhlAnSGB_lon_subsp\n"
-          f"To run Metaphlan with this database add these flags:\n"
-          f"--bowtie2db {output_dir}\n" 
-          f"--index mpa_vOct22_CHOCOPhlAnSGB_lon_subsp")
+    output_files = [output_dir+ "/mpa_vOct22_CHOCOPhlAnSGB_lon_subsp.1.bt2l",
+                    output_dir + "/mpa_vOct22_CHOCOPhlAnSGB_lon_subsp.2.bt2l",
+                    output_dir + "/mpa_vOct22_CHOCOPhlAnSGB_lon_subsp.3.bt2l",
+                    output_dir + "/mpa_vOct22_CHOCOPhlAnSGB_lon_subsp.4.bt2l",
+                    output_dir + "/mpa_vOct22_CHOCOPhlAnSGB_lon_subsp.rev.1.bt2l",
+                    output_dir + "/mpa_vOct22_CHOCOPhlAnSGB_lon_subsp.rev.2.bt2l"]
+    try:
+        if all(os.path.getsize(x)>0  for x in output_files):
+            print(f"MetaPhlAn database updated successfully.\n"
+                  f"The database is saved under {output_dir}/mpa_vOct22_CHOCOPhlAnSGB_lon_subsp\n"
+                  f"To run Metaphlan with this database add these flags:\n"
+                  f"--bowtie2db {output_dir}\n"
+                  f"--index mpa_vOct22_CHOCOPhlAnSGB_lon_subsp")
+        else:
+            print("There was an error creating the database, perhaps not enough memory was given")
+    except OSError as e:
+        print("There was an error creating the database")
+
+
 
 
 if __name__ == "__main__":
