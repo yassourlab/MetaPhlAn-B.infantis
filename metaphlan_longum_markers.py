@@ -35,7 +35,7 @@ def add_markers(db_file, output_dir):
         subprocess.run(
             f"cat {output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212_markers.fasta infantis_ref_markers_panphlan_190423.fa longum_subsp_ref_markers_panphlan_190423.fa > "
             f"{output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212_markers_lon_subsp.fasta", shell=True)
-        subprocess.run(f"bowtie2-build {output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212_markers_lon_subsp.fasta "
+        subprocess.run(f"bowtie2-build  --threads=12 {output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212_markers_lon_subsp.fasta "
                        f"{output_dir}/mpa_vOct22_CHOCOPhlAnSGB_lon_subsp", shell=True) # TODO: add more threads. check what haapens if we ask for more threads than we have
         subprocess.run(f"rm -f {output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212_markers.fasta", shell=True)
         subprocess.run(f"bzip2 {output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212_markers_lon_subsp.fasta", shell=True)
