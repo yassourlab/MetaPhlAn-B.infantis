@@ -18,4 +18,4 @@ Optional arguments:
 `--db_name`   The name of the database without a suffix. Default :'mpa_vOct22_CHOCOPhlAnSGB_202212'  
 `--output`    The directory in which to save the new database. Default: current directory
 
-Note that since the MetaPhlAn bowtie database is inspected and rebuilt this can take time an memory (~12 hours, 32g) 
+Note that since the MetaPhlAn bowtie database is inspected and rebuilt this can take time an memory (~3 hours, 32g, 12 CPUs) 
