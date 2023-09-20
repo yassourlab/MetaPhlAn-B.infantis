@@ -33,7 +33,7 @@ def add_markers(db_file, output_dir):
     try:
         subprocess.run(f"bowtie2-inspect {db_file} > {output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212_markers.fasta", shell=True)
         subprocess.run(
-            f"cat {output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212_markers.fasta infantis_ref_markers_panphlan_190423.fa longum_subsp_ref_markers_panphlan_190423.fa > "
+            f"cat {output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212_markers.fasta infantis_ref_markers_panphlan_180923.fa longum_subsp_ref_markers_panphlan_180923.fa > "
             f"{output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212_markers_lon_subsp.fasta", shell=True)
         subprocess.run(f"bowtie2-build --threads=12 {output_dir}/mpa_vOct22_CHOCOPhlAnSGB_202212_markers_lon_subsp.fasta "
                        f"{output_dir}/mpa_vOct22_CHOCOPhlAnSGB_lon_subsp", shell=True) # TODO: add more threads. check what haapens if we ask for more threads than we have
@@ -56,8 +56,8 @@ def update_pkl_file(pkl_file, output_dir):
         '2|201174|1760|85004|31953|1678|216816|', 2422247)
 
     # add infantis genes
-    infantis_genes = open("infantis_ref_markers_panphlan_190423_names.txt", 'r').read().split('\n')[:-1]
-    gene_len_inf = open("length_infantis_ref_markers_panphlan_190423.txt", 'r').read().split('\n')[:-1]
+    infantis_genes = open("infantis_ref_markers_panphlan_180923_names.txt", 'r').read().split('\n')[:-1]
+    gene_len_inf = open("length_infantis_ref_markers_panphlan_180923.txt", 'r').read().split('\n')[:-1]
     i = 0
     for gene in infantis_genes:
         db['markers'][gene] = {'clade': 't__subsp.infantis',
@@ -68,8 +68,8 @@ def update_pkl_file(pkl_file, output_dir):
         i += 1
 
     # add longum genes
-    longum_genes = open("longum_subsp_ref_markers_panphlan_190423_names.txt", 'r').read().split('\n')[:-1]
-    gene_len_lon = open("length_longum_subsp_ref_markers_panphlan_190423.txt", 'r').read().split('\n')[:-1]
+    longum_genes = open("longum_subsp_ref_markers_panphlan_180923_names.txt", 'r').read().split('\n')[:-1]
+    gene_len_lon = open("length_longum_subsp_ref_markers_panphlan_180923.txt", 'r').read().split('\n')[:-1]
     i = 0
     for gene in longum_genes:
         db['markers'][gene] = {'clade': 't__subsp.longum',
