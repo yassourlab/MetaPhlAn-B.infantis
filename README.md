@@ -1,5 +1,6 @@
 # MetaPhlAn-B.infantis
 MetaPhlAn database that allows quantification of _Bifidobacterium longum_ subspecies (_Bifidobacterium longum_ subsp. _infantis_ and _Bifidobacterium longum_ subsp. _longum_) from metagenomic data. 
+This tool is based on the standard MetaPhlAn4 database. After running it MetaPhlAn4 can re ran as usual with the flags `--index` and `--bowtie2db` specifying the new custom database. 
 
 If you use this tool please cite: 
 
