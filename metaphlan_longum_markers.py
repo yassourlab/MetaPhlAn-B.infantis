@@ -43,7 +43,7 @@ def add_markers(db_file, output_dir):
         print("There was an error creating the database")
 
 
-def update_pkl_file(pkl_file, output_dir):1
+def update_pkl_file(pkl_file, output_dir):
     # open pkl file
     db = pickle.load(bz2.open(pkl_file, 'r'))
 
