@@ -3,6 +3,7 @@ MetaPhlAn database that allows quantification of _Bifidobacterium longum_ subspe
 This tool is based on the standard MetaPhlAn4 database. After running it MetaPhlAn4 can re ran as usual with the flags `--index` and `--bowtie2db` specifying the new custom database. 
 
 If you use this tool please cite: 
+Ennis, D., Shmorak, S., Jantscher-Krenn, E., & Yassour, M. (2024). Longitudinal quantification of Bifidobacterium longum subsp. infantis reveals late colonization in the infant gut independent of maternal milk HMO composition. Nature Communications, 15(1), 894.
 
 ## Installation and requirements
 * Clone the repository using `git clone`.
